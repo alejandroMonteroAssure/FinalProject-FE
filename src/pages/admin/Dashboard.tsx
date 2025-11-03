@@ -1,7 +1,6 @@
 import { MdEdit, MdDelete } from "react-icons/md";
 import { Table } from "../../components/Table";
 import { useState, lazy, Suspense, useMemo } from "react";
-import Navbar from "../../components/Navbar";
 import type { Movie } from "../../domain/Movie";
 import { useMovies } from "../../context/MoviesContext";
 import LoadingModal from "../../components/LoadingModalFallback";
@@ -13,7 +12,6 @@ const MovieFormWizard = lazy(
 );
 
 const ConfirmModal = lazy(() => import("../../components/ConfirmModal"));
-const Toast = lazy(() => import("../../components/Toast"));
 
 type WizardMode = "create" | "edit";
 
@@ -25,8 +23,6 @@ function Dashboard() {
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const { state, addMovie, deleteMovie, editMovie } = useMovies();
-  const [showToast, setShowToast] = useState(false);
-  const [messageToast, setMessageToast] = useState("");
 
   const handleOpenConfirm = (id: number) => {
     setSelectedId(id);
@@ -44,8 +40,6 @@ function Dashboard() {
     }
     setIsDeleteModalOpen(false);
     setSelectedId(null);
-    setMessageToast("Movie deleted successfully");
-    setShowToast(true);
   };
 
   function filterMoviesByName(movies: Movie[]) {

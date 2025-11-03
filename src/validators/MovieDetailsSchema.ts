@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 const uniqueInsensitive =
-  (label: string) => (list?: (string | undefined)[]) => {
+  (_label: string) => (list?: (string | undefined)[]) => {
     if (!Array.isArray(list)) return true;
     const seen = new Set<string>();
     for (const item of list) {
