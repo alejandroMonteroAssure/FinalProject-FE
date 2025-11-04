@@ -28,4 +28,23 @@ jobs:
          name: frontend-movies-build-${{github.sha}}
          path: dist/
          retention-days: 7
-    
+  deploy_staging:
+    name: Deploy to staging
+    needs: build-test-lint
+    if: success() && github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with: 
+          name: frontend-build-${{github.sha}}
+          path: build
+      
+      - name: Deploy to vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{secrets.VERCEL_TOKEN}}
+          vercel-project-id: ${{secrets.VERCEL_PROJECT_ID}}
+          working-directory: build/dist
+          alias-domain: ${{vars.STAGING_ALIAS}}
