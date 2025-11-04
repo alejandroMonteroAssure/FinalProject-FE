@@ -31,7 +31,7 @@ jobs:
   deploy_staging:
     name: Deploy to staging
     needs: build-test-lint
-    if: success() && github.ref == 'refs/heads/dev'
+    if: success() && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: staging
     steps:
