@@ -34,14 +34,11 @@ jobs:
     if: success() && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: staging
-    permissions:
-      actions: read
-      contents: read
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with: 
-          name: frontend-build-${{github.sha}}
+          name: frontend-movies-build-${{github.sha}}
           path: build
       
       - name: Deploy to vercel
