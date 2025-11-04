@@ -1,0 +1,17 @@
+name: Create tag
+on: 
+    workflow_dispatch:
+        inputs:
+            version:
+                description: 'Version number'
+                required: true
+jobs:
+    tag:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with: {fetch-depth: 0}
+            - name: Create Tag
+              run: |
+                git tag ${{inputs.version}}
+                git push origin ${{inputs.version}}
