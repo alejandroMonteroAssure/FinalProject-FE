@@ -35,16 +35,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     steps:
+      - uses: actions/checkout@v4
       - name: Download artifact
         uses: actions/download-artifact@v4
         with: 
           name: frontend-movies-build-${{github.sha}}
-          path: build
+          path: .
       
       - name: Deploy to vercel
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{secrets.VERCEL_TOKEN}}
           vercel-project-id: ${{secrets.VERCEL_PROJECT_ID}}
-          working-directory: build/dist
-          alias-domain: ${{vars.STAGING_ALIAS}}
+          working-directory: dist
+          alias-domains: ${{vars.STAGING_ALIAS}}
