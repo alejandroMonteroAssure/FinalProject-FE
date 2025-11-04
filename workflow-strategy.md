@@ -73,7 +73,7 @@ npm run build
 ### 5. Code Review
 - **Minimum 1 reviewer required**
 - All reviewers must approve
-- Provide constructive feedback (not just "LGTM")
+- Provide constructive feedback (not simple LGTMs)
 - Author fixes all observations before merging
 - Delete branch after merge
 
