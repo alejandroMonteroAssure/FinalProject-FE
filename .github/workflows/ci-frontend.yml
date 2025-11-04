@@ -21,3 +21,10 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+         name: frontend-movies-build-${{github.sha}}
+         path: dist/
+         retention-days: 7
