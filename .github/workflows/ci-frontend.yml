@@ -28,3 +28,4 @@ jobs:
          name: frontend-movies-build-${{github.sha}}
          path: dist/
          retention-days: 7
+    
